@@ -1,0 +1,25 @@
+/ IR Sensor Code for Arduino (Digital Output)
+
+int irSensorPin = 2;  
+int ledPin = 13;       
+int sensorValue = 0;
+
+void setup() {
+  pinMode(irSensorPin, INPUT);  
+  pinMode(ledPin, OUTPUT);      
+  Serial.begin(9600);           
+}
+
+void loop() {
+  sensorValue = digitalRead(irSensorPin);  
+
+  if (sensorValue == LOW) {  
+    digitalWrite(ledPin, HIGH);  
+    Serial.println("Object Detected");
+  } else {
+    digitalWrite(ledPin, LOW);   
+    Serial.println("No Object");
+  }
+
+  delay(200); 
+}
