@@ -1,0 +1,30 @@
+#pushbutton rpi led
+
+import RPi.GPIO as GPIO
+import time
+
+# Pin setup
+BUTTON_PIN = 17 (Pin 11)
+LED_PIN = 18     
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(LED_PIN, GPIO.OUT)
+
+print("Press the button to turn on the LED (Ctrl+C to exit)")
+
+try:
+    while True:
+        if GPIO.input(BUTTON_PIN) == GPIO.HIGH:
+            GPIO.output(LED_PIN, GPIO.HIGH)
+            print("Button Pressed! LED ON")
+        else:
+            GPIO.output(LED_PIN, GPIO.LOW)
+            print("LED OFF")
+        
+        time.sleep(0.1) 
+
+except KeyboardInterrupt:
+    print("Exiting...")
+finally:
+    GPIO.cleanup()
