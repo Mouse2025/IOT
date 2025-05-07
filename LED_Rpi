@@ -1,0 +1,25 @@
+#led rpi
+
+import RPi.GPIO as GPIO
+import time
+
+LED_PIN = 18   (Pin 12)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED_PIN, GPIO.OUT)
+
+print("Blinking LED: ON for 1 sec, OFF for 2 sec")
+
+try:
+    while True:
+        GPIO.output(LED_PIN, GPIO.HIGH)  
+        print("LED ON")
+        time.sleep(1)  
+        
+        GPIO.output(LED_PIN, GPIO.LOW)   
+        print("LED OFF")
+        time.sleep(2)  
+
+except KeyboardInterrupt:
+    
+finally:
+    GPIO.cleanup()
