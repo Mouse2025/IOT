@@ -1,0 +1,28 @@
+#read from cloud
+
+import requests
+
+channel_id = '2885458'
+read_api_key = 'XKJFEJ0EOCTLR08IT'
+
+url = f'https://api.thingspeak.com/channels/{channel_id}/feeds.json?api_key={read_api_key}&results=1'
+
+def read_thingspeak():
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            if 'feeds' in data:
+                latest_entry = data['feeds'][0]
+                temperature = latest_entry.get('field1')
+                humidity = latest_entry.get('field2')
+                print(f'Latest Temperature: {temperature}°C, Humidity: {humidity}%')
+            else:
+                print('No data found in the channel.')
+        else:
+            print('Failed to retrieve data from ThingSpeak. HTTP status code:', response.status_code)
+    except Exception as e:
+        print(f'An error occurred: {str(e)}')
+
+if name == 'main':
+    read_thingspeak()
